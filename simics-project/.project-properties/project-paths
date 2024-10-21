@@ -1,0 +1,5 @@
+project: /home/naranjo/Documentos/2S2023/Empotrados/Proyecto2/PCI_Simics/simics-project
+simics-root: /home/naranjo/Documentos/Simics/simics-6.0.198
+simics-model-builder: /home/naranjo/Documentos/Simics/simics-6.0.198
+simics-python: /home/naranjo/Documentos/Simics/simics-6.0.198
+mingw: None

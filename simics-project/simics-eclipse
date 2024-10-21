@@ -1,0 +1,10 @@
+#!/bin/bash
+# this file will be overwritten by the project setup script
+SIMICS_BASE_PACKAGE="/home/naranjo/Documentos/Simics/simics-6.0.198"
+export SIMICS_BASE_PACKAGE
+export SIMICS_PYTHON_PACKAGE="/home/naranjo/Documentos/Simics/simics-6.0.198"
+if [ -f "/home/naranjo/Documentos/2S2023/Empotrados/Proyecto2/PCI_Simics/simics-project/.package-list" ]; then
+    exec "/home/naranjo/Documentos/Simics/simics-6.0.198/bin/simics-eclipse" --package-list "/home/naranjo/Documentos/2S2023/Empotrados/Proyecto2/PCI_Simics/simics-project/.package-list" --project "/home/naranjo/Documentos/2S2023/Empotrados/Proyecto2/PCI_Simics/simics-project" "$@"
+else
+    exec "/home/naranjo/Documentos/Simics/simics-6.0.198/bin/simics-eclipse" --project "/home/naranjo/Documentos/2S2023/Empotrados/Proyecto2/PCI_Simics/simics-project" "$@"
+fi

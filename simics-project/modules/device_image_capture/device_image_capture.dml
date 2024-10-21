@@ -1,0 +1,85 @@
+dml 1.4;
+
+device device_image_capture;
+import "utility.dml";
+param desc = "Device Image Capture";
+
+param documentation = "This device provides an interface to read an bmp file";
+
+param byte_order = "little-endian";
+
+header %{
+#include <stdio.h>
+#include <stdlib.h>
+%}
+
+extern FILE * fopen(const char *, const char *);
+extern int fgetc(FILE *);
+extern int fclose(FILE *);
+extern typedef struct { } FILE;
+
+// Memory-space connection
+connect target_mem_space {
+    param documentation = "This loads a bmp file to memory";
+    param configuration = "required";
+    interface memory_space;
+}
+
+
+bank regs {
+	register reg_buffer_size size 4 @ 0x0 {
+
+		is read_only;
+		field size_ @ [31:0] is (read_only);
+		param init_val = 0xff
+
+}
+
+	register reg_current_chunk size 8 @ 0x4 {
+
+		field chunk_ @ [31:0] is read_only;
+
+		field total_chunks @ [63:32] is read_only;
+
+		param init_val = 0x0
+
+	}
+
+	register reg_command size 4 @ 0xC {
+
+		is write;
+		field cmd @ [2:0] is write;
+		param init_val = 0x0;
+
+		method write(unit64 value){
+
+			swtch (value[1:0]){
+
+				case 0b01: // start reading
+
+				case 0b10: // nex chunk
+
+				case 0b11: //stop reading
+
+					
+			}
+		}
+	}
+
+	register reg_file_size size 4 @ 0x10 {
+
+		is read;
+
+		field size_ @ [31:0] is read_only;
+		param init_val = 0x0:
+
+	}
+
+	register reg_buffer size 256 @ 0x14{
+
+		is read;
+
+		field buff_ @ [255:0] is read_only;
+
+	}
+}
